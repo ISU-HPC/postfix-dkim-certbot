@@ -1,6 +1,12 @@
 FROM isuhpc/centos-base-systemd
 
-RUN yum -y install postfix epel-release cronie opendkim
+# Install mail components
+RUN yum -y install postfix epel-release cronie opendkim mailx cyrus-sasl-plain
+
+# Install syslog-ng to allow postfix logging
+RUN yum -y install syslog-ng
+
+# Install cerbot for automated SSL renewals
 RUN yum -y install certbot
 
 RUN mkdir /etc/templates
